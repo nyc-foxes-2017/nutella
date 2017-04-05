@@ -8,6 +8,7 @@ class UsersController < ApplicationController
     end
   end
 
+  # not using this rn
   def friends
     user = User.find_by(id: params[:user_id])
     if user

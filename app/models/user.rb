@@ -14,7 +14,7 @@ class User < ApplicationRecord
   end
 
   def friend_requests_recieved
-    self.friendshipbs.where("pending = false")
+    self.friendshipbs.where("pending = true")
   end
   # friends
   def friends
