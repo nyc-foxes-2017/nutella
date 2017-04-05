@@ -5,16 +5,20 @@ class User < ApplicationRecord
   validates :password, { presence: true, length: { minimum: 6 } }
   validates :first_name, :last_name, { presence: true }
   # friendships
-  def friends
+  def friendships
     self.friendshipas.where("pending = false") + self.friendshipbs.where("pending = false")
   end
 
-  def requests_sent
+  def friend_requests_sent
     self.friendshipas.where("pending = true")
   end
 
-  def requests_recieved
+  def friend_requests_recieved
     self.friendshipbs.where("pending = false")
+  end
+  # friends
+  def friends
+    (self.friendshipas.where("pending = false").map { |f| f.friendb }) + (self.friendshipbs.where("pending = false").map { |f| f.frienda })
   end
   # posts
   has_many :posts, foreign_key: :author_id
