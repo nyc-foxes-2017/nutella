@@ -10,11 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-
+ActiveRecord::Schema.define(version: 20170405151823) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-
 
   create_table "comments", force: :cascade do |t|
     t.text     "content",    null: false
@@ -65,5 +64,4 @@
   add_foreign_key "friendships", "users", column: "friendb_id"
   add_foreign_key "posts", "users", column: "author_id"
   add_foreign_key "posts", "users", column: "recipient_id"
->>>>>>> 3f50f0fc1d00124de2daa30202e957f366753f33
 end
