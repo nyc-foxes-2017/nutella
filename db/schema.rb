@@ -10,9 +10,60 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 0) do
+
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+
+  create_table "comments", force: :cascade do |t|
+    t.text     "content",    null: false
+    t.integer  "user_id",    null: false
+    t.integer  "post_id",    null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["post_id"], name: "index_comments_on_post_id", using: :btree
+    t.index ["user_id"], name: "index_comments_on_user_id", using: :btree
+  end
+
+  create_table "friendships", force: :cascade do |t|
+    t.integer  "frienda_id"
+    t.integer  "friendb_id"
+    t.boolean  "pending"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "likes", force: :cascade do |t|
+    t.integer  "user_id",       null: false
+    t.integer  "likeable_id",   null: false
+    t.string   "likeable_type", null: false
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+    t.index ["user_id"], name: "index_likes_on_user_id", using: :btree
+  end
+
+  create_table "posts", force: :cascade do |t|
+    t.text     "content",      null: false
+    t.integer  "author_id",    null: false
+    t.integer  "recipient_id", null: false
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.string   "picture"
+    t.string   "first_name",      null: false
+    t.string   "last_name",       null: false
+    t.string   "email",           null: false
+    t.string   "password_digest", null: false
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+  end
+
+  add_foreign_key "friendships", "users", column: "frienda_id"
+  add_foreign_key "friendships", "users", column: "friendb_id"
+  add_foreign_key "posts", "users", column: "author_id"
+  add_foreign_key "posts", "users", column: "recipient_id"
+>>>>>>> 3f50f0fc1d00124de2daa30202e957f366753f33
 end

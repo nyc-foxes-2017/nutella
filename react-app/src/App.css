@@ -1,3 +1,17 @@
+
+nav {
+  background-color:#3b5998;
+}
+
+textarea {
+  resize:none;
+}
+
+.material-icons {
+  color: #7f7f7f;
+}
+
+
 body {
   background-color:#e9ebee;
   min-width: 950px;
