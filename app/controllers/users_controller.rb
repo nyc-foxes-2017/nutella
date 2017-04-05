@@ -2,12 +2,13 @@ class UsersController < ApplicationController
   def show
     user = User.find_by(id: params[:id])
     if user
-      render json: user.to_json
+      render json: user.to_json(methods: :friends)
     else
       redirect_to :back
     end
   end
 
+  # not using this rn
   def friends
     user = User.find_by(id: params[:user_id])
     if user
